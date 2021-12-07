@@ -28,7 +28,7 @@ console.log('----');
 
 async function run() {
   const rl = readline.createInterface({
-    input: fs.createReadStream(`${__dirname}/${args.inputFile}`),
+    input: fs.createReadStream(args.inputFile),
   });
 
   const lines = [];
@@ -57,10 +57,7 @@ async function run() {
     }
     // console.log('----');
   }
-  console.log(
-    'final subArrayShallowCp (oxygen generator rating): ',
-    subArrayShallowCp
-  );
+  console.log('final subArrayShallowCp (oxygen generator rating): ', subArrayShallowCp);
   const oxygenGeneratorBinary = subArrayShallowCp[0];
   console.log('===========');
 
@@ -81,10 +78,7 @@ async function run() {
     }
     // console.log('----');
   }
-  console.log(
-    'final subArrayShallowCp (CO2 scrubber rating): ',
-    subArrayShallowCp
-  );
+  console.log('final subArrayShallowCp (CO2 scrubber rating): ', subArrayShallowCp);
   const co2ScrubberBinary = subArrayShallowCp[0];
   console.log('===========');
 
@@ -93,10 +87,7 @@ async function run() {
 
   console.log('oxygenGeneratorDecimal: ', oxygenGeneratorDecimal);
   console.log('co2ScrubberDecimal: ', co2ScrubberDecimal);
-  console.log(
-    'oxygenGeneratorDecimal * co2ScrubberDecimal: ',
-    oxygenGeneratorDecimal * co2ScrubberDecimal
-  );
+  console.log('oxygenGeneratorDecimal * co2ScrubberDecimal: ', oxygenGeneratorDecimal * co2ScrubberDecimal);
 }
 
 run();

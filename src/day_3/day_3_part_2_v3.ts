@@ -25,8 +25,9 @@ console.log('args.inputFile:', args.inputFile);
 console.log('----');
 
 async function run() {
+  console.log('ii---:   ', args.inputFile);
   const rl = readline.createInterface({
-    input: fs.createReadStream(`${__dirname}/${args.inputFile}`),
+    input: fs.createReadStream(args.inputFile),
   });
 
   const lines = [];

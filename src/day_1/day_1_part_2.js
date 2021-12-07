@@ -51,7 +51,7 @@ console.log('----');
 
 async function processLineByLine() {
   const rl = readline.createInterface({
-    input: fs.createReadStream(`${__dirname}/${args.inputFile}`),
+    input: fs.createReadStream(args.inputFile),
   });
 
   let window1 = [];

@@ -27,7 +27,7 @@ console.log('----');
 
 async function run() {
   const rl = readline.createInterface({
-    input: fs.createReadStream(`${__dirname}/${args.inputFile}`),
+    input: fs.createReadStream(args.inputFile),
   });
 
   const lines = [];
@@ -45,7 +45,7 @@ async function run() {
   for (let i = 0; i < stringLength; i++) {
     let indexOfFirst1 = -1;
     for (let j = start; j < end; j++) {
-      if (sortedLines.charAt(j) === '1') {
+      if (sortedLines[0].charAt(j) === '1') {
         indexOfFirst1 = j;
         break;
       }

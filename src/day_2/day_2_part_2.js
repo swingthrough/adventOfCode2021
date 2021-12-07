@@ -20,7 +20,7 @@ console.log('args.inputFile:', args.inputFile);
 console.log('----');
 async function processLineByLine() {
   const rl = readline.createInterface({
-    input: fs.createReadStream(`${__dirname}/${args.inputFile}`),
+    input: fs.createReadStream(args.inputFile),
     // output: process.stdout,
     // terminal: false,
   });

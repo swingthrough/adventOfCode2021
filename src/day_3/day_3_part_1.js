@@ -31,7 +31,7 @@ console.log('----');
 
 async function processLineByLine() {
   const rl = readline.createInterface({
-    input: fs.createReadStream(`${__dirname}/${args.inputFile}`),
+    input: fs.createReadStream(args.inputFile),
   });
 
   let totals = null;
@@ -59,10 +59,7 @@ async function processLineByLine() {
   console.log('gammaRateDecimal:\t', gammaRateDecimal);
   console.log('epsilonRateDecimal:\t', epsilonRateDecimal);
 
-  console.log(
-    'gammaRateDecimal * epsilonRateDecimal: ',
-    gammaRateDecimal * epsilonRateDecimal
-  );
+  console.log('gammaRateDecimal * epsilonRateDecimal: ', gammaRateDecimal * epsilonRateDecimal);
 }
 
 processLineByLine();

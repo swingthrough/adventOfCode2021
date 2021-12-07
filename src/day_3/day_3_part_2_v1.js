@@ -39,7 +39,7 @@ console.log('----');
 
 async function run() {
   const rl = readline.createInterface({
-    input: fs.createReadStream(`${__dirname}/${args.inputFile}`),
+    input: fs.createReadStream(args.inputFile),
   });
 
   const lines = [];
@@ -98,10 +98,7 @@ async function run() {
 
   console.log('oxygenGeneratorDecimal: ', oxygenGeneratorDecimal);
   console.log('co2ScrubberDecimal: ', co2ScrubberDecimal);
-  console.log(
-    'oxygenGeneratorDecimal * co2ScrubberDecimal: ',
-    oxygenGeneratorDecimal * co2ScrubberDecimal
-  );
+  console.log('oxygenGeneratorDecimal * co2ScrubberDecimal: ', oxygenGeneratorDecimal * co2ScrubberDecimal);
 }
 
 run();
