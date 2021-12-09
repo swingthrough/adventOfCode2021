@@ -24,14 +24,17 @@ function run() {
   let line;
   if ((line = liner.next())) {
     console.log('line1: ', line.toString());
-  }
-  if ((line = liner.next())) {
-    console.log('line2: ', line.toString());
+    // in case we want only 1 line and end even if there is more
+    // if (liner.next() !== false) {
+    //   liner.close();
+    // }
+  } else {
+    console.log('Input is empty!');
+    return;
   }
 
-  let i = 0;
   while ((line = liner.next())) {
-    console.log(`i=${i++}: `, line.toString('utf8'));
+    console.log(line.toString('utf8'));
   }
 }
 
