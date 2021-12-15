@@ -38,6 +38,7 @@ module.exports = {
         // '@typescript-eslint/no-explicit-any': 0,
         // '@typescript-eslint/no-implicit-any': 1,
         // '@typescript-eslint/no-var-requires': 0,
+        'no-shadow': 'error',
       },
     },
   ],
