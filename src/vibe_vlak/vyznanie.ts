@@ -60,34 +60,11 @@ class Brick {
   private _name: string;
   private _val: string[][];
   private _char: string;
-  private _firstFillCharIdx!: number;
 
   constructor(name: string, val: string[][], char: string) {
     this._name = name;
     this._val = val;
     this._char = char;
-    this._setFirstFillCharIdx();
-  }
-
-  /**
-   * is definitely on the frist line of val (unless invalid input - TODO)
-   */
-  private _setFirstFillCharIdx() {
-    let idx: number | null = null;
-
-    for (const [i, c] of this._val[0].entries()) {
-      if (c !== '.') {
-        idx = i;
-        break;
-      }
-    }
-    if (idx !== null) {
-      this._firstFillCharIdx = idx;
-    } else {
-      throw new Error(
-        `Brick (${this.name}) has invalid state - val property does not contain fill character in the first row`
-      );
-    }
   }
 
   get name() {
@@ -101,28 +78,23 @@ class Brick {
   copy(): Brick {
     const copiedVal = this._val.map((row) => row.slice());
     const newBrick = new Brick(this._name, copiedVal, this._char);
-    newBrick._firstFillCharIdx = this._firstFillCharIdx;
     return newBrick;
   }
 
   rotate90Right() {
     this._val = rotate90Right(this._val);
-    this._setFirstFillCharIdx();
   }
 
   rotate180Right() {
     this._val = rotate180Right(this._val);
-    this._setFirstFillCharIdx();
   }
 
   rotate270Right() {
     this._val = rotate270Right(this._val);
-    this._setFirstFillCharIdx();
   }
 
   mirrorHorizontal() {
     this._val = mirrorHorizontal(this._val);
-    this._setFirstFillCharIdx();
   }
 
   get width() {
@@ -298,7 +270,7 @@ function solve(bricks: Brick[], startConfig: Field): boolean {
   // 1. check field for bricks that are used on start already
   // 2. loop recursively through remaining bricks to try to fit them
 
-  // 1. -------
+  // STEP 1. -------
 
   // Find which bricks are already in use (keep only the chars)
   // we can then find the brick via char through charMappedBricks
@@ -319,7 +291,7 @@ function solve(bricks: Brick[], startConfig: Field): boolean {
   // console.log('usedBrickChars:', usedBrickChars);
   // console.log('charMappedBricks:', charMappedBricks);
 
-  // test
+  // ===== TESTING LOGS TO CHECK IF BRICK PLACING WORKS PROPERLY =====
   // const brickW = charMappedBricks.get('W')!;
   // console.log(startConfig.stringifyField());
   // let placed = startConfig.placeBrickIfPossible(brickW, 0, 9);
@@ -335,16 +307,21 @@ function solve(bricks: Brick[], startConfig: Field): boolean {
   // console.log('call startConfig.undo()');
   // startConfig.undo();
   // console.log(startConfig.stringifyField());
+  // =================================================================
 
   const unused: Set<string> = new Set(charMappedBricks.keys());
 
-  // 2. -------
+  // STEP 2. -------
 
-  const solved = rec(unused, charMappedBricks, startConfig);
+  const solved = solveRecursive(unused, charMappedBricks, startConfig);
   return solved;
 }
 
-function rec(unusedBrickChars: Set<string>, charMappedBricks: Map<string, Brick>, field: Field): boolean {
+function solveRecursive(
+  unusedBrickChars: Set<string>,
+  charMappedBricks: Map<string, Brick>,
+  field: Field
+): boolean {
   if (unusedBrickChars.size === 0) {
     return true;
   }
@@ -363,9 +340,9 @@ function rec(unusedBrickChars: Set<string>, charMappedBricks: Map<string, Brick>
             const restOfBrickChars: Set<string> = new Set(
               [...unusedBrickChars].filter((b) => b !== brickChar)
             );
-            const solved = rec(restOfBrickChars, charMappedBricks, field);
+            const solved = solveRecursive(restOfBrickChars, charMappedBricks, field);
             if (solved) {
-              return true; // TODO: return field snapshot, or not necessary??????????
+              return true;
             } else {
               // We get here if this brickConfiguration was placed at (i,j), but somewhere down
               // the line, next bricks could not be placed and therefore it didn't solve, so
