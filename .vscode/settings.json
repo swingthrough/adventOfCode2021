@@ -12,7 +12,11 @@
     "**/Thumbs.db": true,
     "**/node_modules": false
   },
-  "prettier.printWidth": 120
+  "prettier.printWidth": 120,
   // "editor.wordWrap": "wordWrapColumn",
   // "editor.wordWrapColumn": 100
+  "[plaintext]": {
+    "editor.wordBasedSuggestions": false,
+    "editor.quickSuggestions": false
+  }
 }

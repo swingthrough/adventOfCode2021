@@ -38,7 +38,27 @@ module.exports = {
         // '@typescript-eslint/no-explicit-any': 0,
         // '@typescript-eslint/no-implicit-any': 1,
         // '@typescript-eslint/no-var-requires': 0,
-        'no-shadow': 'error',
+        // 'no-shadow': 'error',
+        /*
+        override no-shadow to avoid a bug:
+        '<EnumName>' is already declared in the upper scope on line x column y.
+        where x is actually the line number of the only definition of the enum
+  
+        https://stackoverflow.com/questions/63961803/eslint-says-all-enums-in-typescript-app-are-already-declared-in-the-upper-scope
+        
+        so we need both:
+        'no-shadow': 'off',
+        '@typescript-eslint/no-shadow': ['error'],
+      */
+        'no-shadow': 'off',
+        '@typescript-eslint/no-shadow': ['warn'],
+
+        /**
+         *
+         *
+         */
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': 'warn',
       },
     },
   ],
